@@ -48,34 +48,39 @@ class App extends Component {
       cursor: 'pointer'
     };
     
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Max3') /*recommended*/}
+            changed={this.nameChangedHandler}
+          >
+            His hobbies: racing
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          />
+        </div>
+      );
+    }
+
     return (
-      <div className="App">
+      <div className='App'>
         <h1>Hi, this is my first react app!!</h1>
         <h1>another heading can be add only insight App</h1>
-        <button
-          style={ buttonStyle }
-          onClick={ this.togglePersonsHandler }>Toggle Persons</button>
-        { 
-          this.state.showPersons ?
-          <div>
-            <Person
-              name={ this.state.persons[0].name }
-              age={ this.state.persons[0].age }
-            />
-            <Person
-              name={ this.state.persons[1].name }
-              age={ this.state.persons[1].age }
-              click={ this.switchNameHandler.bind(this, 'Max3') /*recommended*/ }
-              changed={ this.nameChangedHandler }
-            >
-              His hobbies: racing
-            </Person>
-            <Person
-              name={ this.state.persons[2].name }
-              age={ this.state.persons[2].age }
-            />
-          </div> : null
-        }
+        <button style={buttonStyle} onClick={this.togglePersonsHandler}>
+          Toggle Persons
+        </button>
+        { persons }
       </div>
     );
   }
