@@ -8,7 +8,8 @@ class App extends Component {
       { name: 'Max', age: 28 },
       { name: 'Mat', age: 23 },
       { name: 'Tom', age: 31 },
-    ]
+    ],
+    showPersons: false
   };
 
   switchNameHandler = (newName) => {
@@ -32,6 +33,12 @@ class App extends Component {
     });
   }
 
+  togglePersonsHandler = () => {
+    this.setState({
+      showPersons: !this.state.showPersons
+    });
+  }
+
   render() {
     const buttonStyle = {
       backgroundColor: 'white',
@@ -47,23 +54,28 @@ class App extends Component {
         <h1>another heading can be add only insight App</h1>
         <button
           style={ buttonStyle }
-          onClick={ () => this.switchNameHandler('Max2') /*anonymous function inefficient, not recommended*/ }>Switch Name</button>
-        <Person
-          name={ this.state.persons[0].name }
-          age={ this.state.persons[0].age }
-        />
-        <Person
-          name={ this.state.persons[1].name }
-          age={ this.state.persons[1].age }
-          click={ this.switchNameHandler.bind(this, 'Max3') /*recommended*/ }
-          changed={ this.nameChangedHandler }
-        >
-          His hobbies: racing
-        </Person>
-        <Person
-          name={ this.state.persons[2].name }
-          age={ this.state.persons[2].age }
-        />
+          onClick={ this.togglePersonsHandler }>Toggle Persons</button>
+        { 
+          this.state.showPersons ?
+          <div>
+            <Person
+              name={ this.state.persons[0].name }
+              age={ this.state.persons[0].age }
+            />
+            <Person
+              name={ this.state.persons[1].name }
+              age={ this.state.persons[1].age }
+              click={ this.switchNameHandler.bind(this, 'Max3') /*recommended*/ }
+              changed={ this.nameChangedHandler }
+            >
+              His hobbies: racing
+            </Person>
+            <Person
+              name={ this.state.persons[2].name }
+              age={ this.state.persons[2].age }
+            />
+          </div> : null
+        }
       </div>
     );
   }
