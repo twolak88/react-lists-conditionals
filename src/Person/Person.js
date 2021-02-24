@@ -1,6 +1,10 @@
 import './Person.css';
 
 const person = (props) => {
+  const rnd = Math.random();
+  if (rnd > 0.8) {
+    throw new Error('Randomly throw error');
+  }
   return (
     <div className="Person">
       <p onClick={ props.click }>
